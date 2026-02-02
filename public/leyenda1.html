@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>La Llorona | Ecuador Legendario</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:'Segoe UI', sans-serif;
+        background: radial-gradient(circle at top, #0b1320, #02040a);
+        color:#eaeaea;
+    }
+
+    .contenedor{
+        max-width:1000px;
+        margin:auto;
+        padding:50px 20px;
+    }
+
+    h1{
+        text-align:center;
+        font-size:2.8em;
+        margin-bottom:10px;
+        color:#e6f1ff;
+    }
+
+    h2{
+        text-align:center;
+        font-weight:300;
+        margin-bottom:40px;
+        color:#7dd3fc;
+    }
+
+    .imagen{
+        margin:40px 0;
+        height:380px;
+        border-radius:14px;
+        background-size:cover;
+        background-position:center;
+        box-shadow:0 0 25px rgba(0,0,0,0.8);
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .imagen:hover{
+        transform:scale(1.02);
+        box-shadow:0 0 35px rgba(0,0,0,1);
+    }
+
+    .texto{
+        background:rgba(10,18,35,0.78);
+        padding:30px;
+        border-radius:16px;
+        line-height:1.9;
+        font-size:1.1em;
+        box-shadow:inset 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .seccion{
+        margin-top:70px;
+    }
+
+    .boton{
+        background:#22c55e;
+        border:none;
+        padding:12px 26px;
+        border-radius:30px;
+        cursor:pointer;
+        font-size:1em;
+        margin:8px 8px 0 0;
+        transition:0.3s;
+    }
+
+    .boton:hover{
+        background:#16a34a;
+        transform:scale(1.05);
+    }
+
+    .feedback{
+        margin-top:15px;
+        font-weight:500;
+    }
+
+    input[type="text"]{
+        width:100%;
+        padding:10px;
+        border-radius:10px;
+        border:none;
+        margin:8px 0;
+        font-size:1em;
+    }
+
+    footer{
+        margin-top:80px;
+        text-align:center;
+        font-size:0.9em;
+        opacity:0.7;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.92);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    }
+
+    .lightbox img{
+        max-width:90%;
+        max-height:90%;
+        border-radius:14px;
+        box-shadow:0 0 40px rgba(0,0,0,0.9);
+    }
+
+    .cerrar{
+        position:absolute;
+        top:25px;
+        right:35px;
+        font-size:35px;
+        color:#fff;
+        cursor:pointer;
+        font-weight:bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>La Llorona</h1>
+<h2>Ecuador Legendario</h2>
+
+<!-- IMAGEN 1 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/llorona1.jpg')"
+     style="background-image:url('Imagenes/llorona1.jpg');"></div>
+
+<div class="texto">
+    En las noches silenciosas de los pueblos ecuatorianos, cuando la neblina
+    cubre los caminos y el viento parece susurrar antiguos lamentos,
+    muchas personas aseguran haber escuchado un grito desgarrador:
+    <em>“¡Ay, mis hijos!”</em>
+
+    <br><br>
+
+    Según la tradición oral del Ecuador, La Llorona fue una mujer humilde
+    que vivía cerca de un río. Engañada por un amor que nunca regresó,
+    su dolor se transformó en desesperación.
+</div>
+
+<!-- IMAGEN 2 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/llorona2.jpg')"
+     style="background-image:url('Imagenes/llorona2.jpg');"></div>
+
+<div class="texto">
+    En una noche oscura, dominada por la tristeza y la confusión,
+    ocurrió una tragedia irreparable. Al darse cuenta de su error,
+    su llanto se mezcló con el sonido del agua y su espíritu quedó
+    condenado a vagar eternamente.
+
+    <br><br>
+
+    En Ecuador se dice que La Llorona aparece cerca de ríos,
+    quebradas y antiguos caminos rurales, vestida de blanco,
+    buscando sin descanso a sus hijos.
+</div>
+
+<!-- IMAGEN 3 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/llorona3.webp')"
+     style="background-image:url('Imagenes/llorona3.webp');"></div>
+
+<div class="texto">
+    Más que una historia de terror, esta leyenda transmite
+    una enseñanza profunda: el respeto por la vida,
+    la familia y las decisiones que marcan nuestro destino.
+
+    <br><br>
+
+    Por ello, La Llorona forma parte del patrimonio cultural
+    ecuatoriano y continúa siendo contada de generación en generación.
+</div>
+
+<!-- CUESTIONARIO -->
+<div class="seccion">
+<h2>🧠 Comprueba lo aprendido</h2>
+
+<div class="texto">
+    <p><strong>1. ¿Dónde suele aparecer La Llorona según la leyenda ecuatoriana?</strong></p>
+
+    <button class="boton" onclick="respuesta1(true)">Cerca de ríos y quebradas</button>
+    <button class="boton" onclick="respuesta1(false)">En iglesias y plazas</button>
+
+    <p id="feedback1" class="feedback"></p>
+
+    <br>
+
+    <p><strong>2. ¿Qué enseñanza deja esta leyenda?</strong></p>
+
+    <button class="boton" onclick="respuesta2(true)">Advierte sobre las decisiones y la familia</button>
+    <button class="boton" onclick="respuesta2(false)">Es solo una historia sin significado</button>
+
+    <p id="feedback2" class="feedback"></p>
+</div>
+</div>
+
+<!-- COMPLETAR TEXTO -->
+<div class="seccion">
+<h2>✍️ Completa el texto</h2>
+
+<div class="texto">
+    La Llorona aparece vestida de
+    <input type="text" id="color" placeholder="Color del vestido">
+
+    y se manifiesta durante la
+    <input type="text" id="momento" placeholder="Momento del día">
+
+    <button class="boton" onclick="verificarTexto()">Verificar</button>
+
+    <p id="feedbackTexto" class="feedback"></p>
+</div>
+</div>
+
+<footer>
+    Ecuador Legendario © 2026 — Preservando mitos y leyendas ecuatorianas
+</footer>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="cerrarImagen()">
+    <span class="cerrar">&times;</span>
+    <img id="imgLightbox">
+</div>
+
+<script>
+function abrirImagen(src){
+    document.getElementById("imgLightbox").src = src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function cerrarImagen(){
+    document.getElementById("lightbox").style.display = "none";
+}
+
+/* ===== ACTIVIDADES ===== */
+function respuesta1(correcta){
+    let f = document.getElementById("feedback1");
+    if(correcta){
+        f.innerHTML = "✔️ Correcto. La Llorona aparece cerca del agua, lugares ligados a su tragedia.";
+        f.style.color = "#22c55e";
+    }else{
+        f.innerHTML = "❌ Incorrecto. En la tradición ecuatoriana no aparece en iglesias.";
+        f.style.color = "#ef4444";
+    }
+}
+
+function respuesta2(correcta){
+    let f = document.getElementById("feedback2");
+    if(correcta){
+        f.innerHTML = "✔️ Muy bien. La leyenda transmite una advertencia moral.";
+        f.style.color = "#22c55e";
+    }else{
+        f.innerHTML = "❌ Incorrecto. Las leyendas siempre enseñan valores culturales.";
+        f.style.color = "#ef4444";
+    }
+}
+
+function verificarTexto(){
+    let color = document.getElementById("color").value.toLowerCase().trim();
+    let momento = document.getElementById("momento").value.toLowerCase().trim();
+    let f = document.getElementById("feedbackTexto");
+
+    if(color === "blanco" && (momento === "noche" || momento === "la noche")){
+        f.innerHTML = "✔️ Excelente. Has identificado correctamente la leyenda.";
+        f.style.color = "#22c55e";
+    }else{
+        f.innerHTML = "❌ Revisa la historia: viste de blanco y aparece de noche.";
+        f.style.color = "#ef4444";
+    }
+}
+</script>
+
+</body>
+</html>

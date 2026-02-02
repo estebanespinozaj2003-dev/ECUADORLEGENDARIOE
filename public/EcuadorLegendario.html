@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecuador Legendario</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Ecuador Legendario</div>
+
+    <nav class="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#gratuitas">Leyendas Gratuitas</a>
+      <a href="#premium">Leyendas Premium</a>
+
+      <button id="supportBtn" class="btn-ghost" type="button">Soporte</button>
+
+      <!-- login/logout -->
+      <button id="loginOpenBtn" class="btn-ghost" type="button">Ingresar</button>
+      <button id="logoutBtn" class="btn-ghost" type="button">Salir</button>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>ECUADOR LEGENDARIO</h1>
+      <p>
+        Historias nacidas entre volcanes, ríos y selvas.
+        Espíritus, criaturas y relatos que aún viven en la memoria del Ecuador.
+      </p>
+      <a href="#gratuitas" class="btn-primary">Explorar Leyendas →</a>
+    </div>
+  </section>
+
+  <!-- GRATUITAS -->
+  <section id="gratuitas" class="section">
+    <h2>Leyendas Gratuitas</h2>
+
+    <div class="grid-2">
+      <div class="card" data-info="El lamento que se escucha junto a los ríos">
+        <div class="card-img"
+          style="background-image:url('imagenes/imagen2.webp')"
+          data-image="imagenes/imagen2.webp"
+          role="button" tabindex="0"></div>
+        <h3>La Llorona</h3>
+        <p>Un espíritu que vaga en la noche buscando a sus hijos.</p>
+        <a href="leyenda1.html" class="link">Leer más</a>
+      </div>
+
+      <div class="card" data-info="El guardián travieso del bosque">
+        <div class="card-img"
+          style="background-image:url('imagenes/imagen3.jpg')"
+          data-image="imagenes/imagen3.jpg"
+          role="button" tabindex="0"></div>
+        <h3>El Duende de San Gerardo</h3>
+        <p>Pequeña criatura que protege la naturaleza.</p>
+        <a href="leyenda2.html" class="link">Leer más</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM -->
+  <section id="premium" class="section premium">
+    <h2>🔒 Leyendas Premium</h2>
+
+    <p class="premium-text">
+      Accede a relatos más profundos y misteriosos, con experiencias inmersivas
+      y actividades interactivas. <strong>$4.99 / mes</strong>
+    </p>
+
+    <!-- Beneficios desplegable -->
+    <div class="premium-panel">
+      <button id="benefitsToggle" class="premium-toggle" type="button" aria-expanded="false">
+        <span>✨ Beneficios Premium</span>
+        <span class="chev" aria-hidden="true">▾</span>
+      </button>
+
+      <div id="benefitsBody" class="premium-body" hidden>
+        <ul class="benefits-list">
+          <li><strong>Realidad Virtual (VR) por QR:</strong> entornos inmersivos por cada leyenda.</li>
+          <li><strong>Realidad Aumentada (AR) por QR:</strong> interactúa con escenas con tu cámara.</li>
+          <li><strong>Comprensión lectora:</strong> preguntas y textos por completar al final.</li>
+          <li><strong>Retroalimentación inmediata:</strong> resultados + explicación.</li>
+          <li><strong>Contenido exclusivo:</strong> versiones extendidas y extras (próximamente).</li>
+        </ul>
+
+        <div class="benefits-foot">
+          Incluido en <strong>$4.99/mes</strong> (modo demo por ahora).
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card premium-card" data-info="El espíritu encantador de los ríos amazónicos">
+        <div class="card-img"
+          style="background-image:url('imagenes/imageen4.png')"
+          data-image="imagenes/imageen4.png"
+          role="button" tabindex="0"></div>
+        <h3>El Delfín Rosado</h3>
+        <button class="btn-premium" data-premium-link="leyenda-premium-1.html" type="button">Ver leyenda</button>
+      </div>
+
+      <div class="card premium-card" data-info="El espíritu volcánico de los Andes">
+        <div class="card-img"
+          style="background-image:url('imagenes/imagen5.webp')"
+          data-image="imagenes/imagen5.webp"
+          role="button" tabindex="0"></div>
+        <h3>El Guagua Pichincha</h3>
+        <button class="btn-premium" data-premium-link="leyenda-premium-2.html" type="button">Ver leyenda</button>
+      </div>
+
+      <div class="card premium-card" data-info="La procesión de almas errantes">
+        <div class="card-img"
+          style="background-image:url('imagenes/imagen6.png')"
+          data-image="imagenes/imagen6.png"
+          role="button" tabindex="0"></div>
+        <h3>La Santa Compaña</h3>
+        <button class="btn-premium" data-premium-link="leyenda-premium-3.html" type="button">Ver leyenda</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Ecuador Legendario © 2026</p>
+    <p class="footer-small">Hecho con pasión desde los Andes</p>
+  </footer>
+
+  <!-- MODAL: VER IMAGEN -->
+  <div id="imageModal" class="modal" aria-hidden="true">
+    <span class="close" aria-label="Cerrar">&times;</span>
+    <img id="modalImg" class="modal-content" alt="Imagen ampliada">
+  </div>
+
+  <!-- MODAL: LOGIN -->
+  <div id="loginModal" class="modal" aria-hidden="true">
+    <div class="box">
+      <span class="close-login" aria-label="Cerrar">&times;</span>
+      <h2>👤 Iniciar sesión</h2>
+      <p class="muted">Usa tu email y contraseña registrados</p>
+
+      <label class="label">Email</label>
+      <input id="loginEmail" class="input" type="email" placeholder="correo@ejemplo.com" />
+
+      <label class="label">Contraseña</label>
+      <input id="loginPass" class="input" type="password" placeholder="••••••••" />
+
+      <button id="loginBtn" class="btn-primary w100" type="button">Entrar</button>
+      <button id="openRegisterBtn" class="btn-secondary w100" type="button">Crear cuenta</button>
+      <button id="closeLogin" class="btn-secondary w100" type="button">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRO -->
+  <div id="registerModal" class="modal" aria-hidden="true">
+    <div class="box">
+      <span class="close-register" aria-label="Cerrar">&times;</span>
+      <h2>📝 Crear cuenta</h2>
+      <p class="muted">Regístrate para acceder a Premium</p>
+
+      <label class="label">Email</label>
+      <input id="regEmail" class="input" type="email" placeholder="correo@ejemplo.com" />
+
+      <label class="label">Contraseña</label>
+      <input id="regPass" class="input" type="password" placeholder="••••••••" />
+
+      <button id="registerBtn" class="btn-primary w100" type="button">Registrar</button>
+      <button id="closeRegister" class="btn-secondary w100" type="button">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PREMIUM (SOLO CAMBIA EL PAGO) -->
+  <div id="premiumModal" class="modal" aria-hidden="true">
+    <div class="box premium-box">
+      <span class="close-premium" aria-label="Cerrar">&times;</span>
+      <h2>🔒 Contenido Premium</h2>
+      <p>Para acceder necesitas suscripción.</p>
+
+      <!-- ✅ PayPal real: aquí se renderiza el botón -->
+      <div id="paypal-button-container" class="paypal-box"></div>
+      <p id="paypalStatus" class="tiny-note"></p>
+
+      <button id="closePremium" class="btn-secondary w100" type="button">Tal vez después</button>
+      <p class="tiny-note">* En versión final (LIVE) PayPal cobra de verdad. En SANDBOX es prueba.</p>
+    </div>
+  </div>
+
+  <!-- MODAL SOPORTE -->
+  <div id="supportModal" class="modal" aria-hidden="true">
+    <div class="box support-box">
+      <span class="close-support" aria-label="Cerrar">&times;</span>
+      <h2>🛟 Soporte</h2>
+      <p class="muted">¿Necesitas ayuda? Contáctanos por:</p>
+
+      <div class="support-list">
+        <a class="support-item" href="mailto:soporte@ecuadorlegendario.com">
+          📧 Correo: soporte@ecuadorlegendario.com
+        </a>
+        <a class="support-item" href="https://wa.me/593988381585" target="_blank" rel="noopener">
+          💬 WhatsApp: +593 988381585
+        </a>
+        <a class="support-item" href="https://instagram.com/ecuadorlegendario" target="_blank" rel="noopener">
+          📱 Instagram: @ecuadorlegendario
+        </a>
+      </div>
+
+      <button id="closeSupport" class="btn-secondary w100" type="button">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

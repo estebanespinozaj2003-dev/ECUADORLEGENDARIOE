@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>El Duende de San Gerardo | Ecuador Legendario</title>
+
+<style>
+    body{
+        margin:0;
+        font-family:'Segoe UI', sans-serif;
+        background: radial-gradient(circle at top, #071a17, #020b0a);
+        color:#e6f1ee;
+    }
+
+    .contenedor{
+        max-width:1000px;
+        margin:auto;
+        padding:50px 20px;
+    }
+
+    h1{
+        text-align:center;
+        font-size:2.8em;
+        margin-bottom:10px;
+        color:#d1fae5;
+    }
+
+    h2{
+        text-align:center;
+        font-weight:300;
+        margin-bottom:40px;
+        color:#6ee7b7;
+    }
+
+    .imagen{
+        margin:40px 0;
+        height:380px;
+        border-radius:14px;
+        background-size:cover;
+        background-position:center;
+        box-shadow:0 0 25px rgba(0,0,0,0.85);
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .imagen:hover{
+        transform:scale(1.02);
+    }
+
+    .texto{
+        background:rgba(5,25,22,0.8);
+        padding:30px;
+        border-radius:16px;
+        line-height:1.9;
+        font-size:1.1em;
+        box-shadow:inset 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .seccion{
+        margin-top:70px;
+    }
+
+    .boton{
+        background:#10b981;
+        border:none;
+        padding:12px 26px;
+        border-radius:30px;
+        cursor:pointer;
+        font-size:1em;
+        margin:8px 8px 0 0;
+        transition:0.3s;
+    }
+
+    .boton:hover{
+        background:#059669;
+        transform:scale(1.05);
+    }
+
+    .feedback{
+        margin-top:15px;
+        font-weight:500;
+    }
+
+    input[type="text"]{
+        width:100%;
+        padding:10px;
+        border-radius:10px;
+        border:none;
+        margin:8px 0;
+        font-size:1em;
+    }
+
+    footer{
+        margin-top:80px;
+        text-align:center;
+        font-size:0.9em;
+        opacity:0.7;
+    }
+
+    /* LIGHTBOX */
+    .lightbox{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.93);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    }
+
+    .lightbox img{
+        max-width:90%;
+        max-height:90%;
+        border-radius:14px;
+    }
+
+    .cerrar{
+        position:absolute;
+        top:25px;
+        right:35px;
+        font-size:35px;
+        color:#fff;
+        cursor:pointer;
+        font-weight:bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>El Duende de San Gerardo</h1>
+<h2>Leyenda de la sierra ecuatoriana</h2>
+
+<!-- IMAGEN 1 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/duende1.webp')"
+     style="background-image:url('Imagenes/duende1.webp');"></div>
+
+<div class="texto">
+    En los bosques fríos y neblinosos de San Gerardo, cuando el canto de los
+    pájaros se apaga y la noche comienza a cubrir los senderos,
+    muchos habitantes aseguran haber visto una pequeña figura
+    observándolos desde los árboles.
+
+    <br><br>
+
+    El Duende de San Gerardo es descrito como un ser pequeño,
+    de ojos brillantes y sombrero verde, protector del bosque
+    y guardián de la naturaleza.
+</div>
+
+<!-- IMAGEN 2 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/duende2.jpg')"
+     style="background-image:url('Imagenes/duende2.jpg');"></div>
+
+<div class="texto">
+    Según la leyenda, el duende aparece para confundir a quienes
+    dañan la montaña, cortan árboles sin permiso o se burlan
+    del silencio del bosque. Sus risas se escuchan entre la neblina
+    y muchos viajeros han regresado sin recordar el camino.
+
+    <br><br>
+
+    Sin embargo, quienes respetan la naturaleza aseguran que
+    el duende los protege y los guía de regreso a casa.
+</div>
+
+<!-- IMAGEN 3 -->
+<div class="imagen" onclick="abrirImagen('Imagenes/duende3.jpg')"
+     style="background-image:url('Imagenes/duende3.jpg');"></div>
+
+<div class="texto">
+    Esta leyenda enseña que la montaña no es solo tierra,
+    sino un ser vivo que debe ser respetado. El Duende de San Gerardo
+    representa el equilibrio entre el ser humano y la naturaleza.
+</div>
+
+<!-- CUESTIONARIO -->
+<div class="seccion">
+<h2>🧠 Comprueba lo aprendido</h2>
+
+<div class="texto">
+    <p><strong>1. ¿Cuál es la función del Duende de San Gerardo?</strong></p>
+
+    <button class="boton" onclick="respuesta1(true)">Proteger el bosque</button>
+    <button class="boton" onclick="respuesta1(false)">Asustar sin razón</button>
+
+    <p id="feedback1" class="feedback"></p>
+
+    <br>
+
+    <p><strong>2. ¿Qué enseñanza transmite esta leyenda?</strong></p>
+
+    <button class="boton" onclick="respuesta2(true)">Respeto por la naturaleza</button>
+    <button class="boton" onclick="respuesta2(false)">Miedo a los bosques</button>
+
+    <p id="feedback2" class="feedback"></p>
+</div>
+</div>
+
+<!-- COMPLETAR TEXTO -->
+<div class="seccion">
+<h2>✍️ Completa el texto</h2>
+
+<div class="texto">
+    El Duende aparece en los
+    <input type="text" id="lugar" placeholder="Lugar natural">
+
+    y protege a quienes
+    <input type="text" id="accion" placeholder="Acción correcta">
+
+    <button class="boton" onclick="verificarTexto()">Verificar</button>
+
+    <p id="feedbackTexto" class="feedback"></p>
+</div>
+</div>
+
+<footer>
+    Ecuador Legendario © 2026 — Guardianes de la tradición oral
+</footer>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="cerrarImagen()">
+    <span class="cerrar">&times;</span>
+    <img id="imgLightbox">
+</div>
+
+<script>
+function abrirImagen(src){
+    document.getElementById("imgLightbox").src = src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function cerrarImagen(){
+    document.getElementById("lightbox").style.display = "none";
+}
+
+function respuesta1(correcta){
+    let f = document.getElementById("feedback1");
+    if(correcta){
+        f.innerHTML = "✔️ Correcto. El duende protege el bosque y la naturaleza.";
+        f.style.color = "#10b981";
+    }else{
+        f.innerHTML = "❌ Incorrecto. No aparece sin razón, cumple una función protectora.";
+        f.style.color = "#ef4444";
+    }
+}
+
+function respuesta2(correcta){
+    let f = document.getElementById("feedback2");
+    if(correcta){
+        f.innerHTML = "✔️ Muy bien. La leyenda promueve el respeto por la naturaleza.";
+        f.style.color = "#10b981";
+    }else{
+        f.innerHTML = "❌ Incorrecto. No busca infundir miedo, sino conciencia ambiental.";
+        f.style.color = "#ef4444";
+    }
+}
+
+function verificarTexto(){
+    let lugar = document.getElementById("lugar").value.toLowerCase().trim();
+    let accion = document.getElementById("accion").value.toLowerCase().trim();
+    let f = document.getElementById("feedbackTexto");
+
+    if((lugar.includes("bosque") || lugar.includes("montaña")) &&
+       (accion.includes("respet") || accion.includes("cuid"))){
+        f.innerHTML = "✔️ Excelente. Has comprendido el mensaje de la leyenda.";
+        f.style.color = "#10b981";
+    }else{
+        f.innerHTML = "❌ Revisa la historia: el duende vive en el bosque y protege a quienes respetan la naturaleza.";
+        f.style.color = "#ef4444";
+    }
+}
+</script>
+
+</body>
+</html>
