@@ -1,15 +1,12 @@
 "use strict";
 
 /* =========================
-   ENV (ruta correcta)
+   ENV
 ========================= */
 const path = require("path");
 require("dotenv").config({
   path: path.join(__dirname, ".env")
 });
-
-// 🔥 Verificación (puedes borrar luego)
-console.log("🔥 PAYPAL_CLIENT_ID =", process.env.PAYPAL_CLIENT_ID);
 
 /* =========================
    Imports
@@ -48,7 +45,7 @@ const PAYPAL_API_BASE =
    Paths
 ========================= */
 const DB_PATH = path.join(__dirname, "legendario.sqlite");
-const publicPath = path.join(__dirname, "..", "public");
+const publicPath = path.join(__dirname, "public");
 
 /* =========================
    Middleware
@@ -67,6 +64,11 @@ app.use(
     }
   })
 );
+
+/* =========================
+   Static files (FRONTEND)
+========================= */
+app.use(express.static(publicPath));
 
 /* =========================
    DB (SQLite)
@@ -91,7 +93,9 @@ db.serialize(() => {
    Helpers
 ========================= */
 function requireLogin(req, res, next) {
-  if (!req.session.user) return res.status(401).json({ error: "NO_LOGIN" });
+  if (!req.session.user) {
+    return res.status(401).json({ error: "NO_LOGIN" });
+  }
   next();
 }
 
@@ -163,7 +167,7 @@ app.get("/api/auth/me", (req, res) => {
 });
 
 /* =========================
-   CONFIG PARA FRONTEND
+   CONFIG FRONTEND
 ========================= */
 app.get("/api/config", (req, res) => {
   res.json({
@@ -277,15 +281,6 @@ app.post("/api/paypal/capture-order", requireLogin, async (req, res) => {
     console.error("PAYPAL CAPTURE ERROR:", e.message);
     res.status(500).json({ error: "PAYPAL_CAPTURE_FAILED" });
   }
-});
-
-/* =========================
-   Static
-========================= */
-app.use(express.static(publicPath));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "EcuadorLegendario.html"));
 });
 
 /* =========================

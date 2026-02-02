@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>El Delfín Rosado del Oriente | Ecuador Legendario</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@300;400;600&display=swap');
+
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:
+    radial-gradient(circle at top, #e0f7fa, #c7ecee 40%, #0f766e 100%);
+  color:#063c3c;
+}
+
+.contenedor{
+  max-width:1000px;
+  margin:auto;
+  padding:70px 22px;
+}
+
+/* TÍTULOS */
+h1{
+  text-align:center;
+  font-family:'Fredoka', cursive;
+  font-size:3em;
+  margin-bottom:10px;
+  color:#ec4899;
+  text-shadow:
+    0 0 20px rgba(236,72,153,.45),
+    0 0 40px rgba(255,182,193,.35);
+}
+
+h2{
+  text-align:center;
+  font-weight:400;
+  margin-bottom:60px;
+  color:#0ea5a4;
+}
+
+/* IMÁGENES */
+.imagen{
+  margin:70px 0;
+  height:400px;
+  border-radius:30px;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 0 60px rgba(0,0,0,.35),
+    inset 0 0 30px rgba(255,255,255,.25);
+  cursor:pointer;
+  transition:.5s ease;
+}
+
+.imagen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.35),
+    rgba(0,0,0,.15)
+  );
+  border-radius:30px;
+  pointer-events:none;
+}
+
+.imagen:hover{
+  transform:scale(1.03);
+  box-shadow:
+    0 0 90px rgba(236,72,153,.35),
+    inset 0 0 40px rgba(255,255,255,.35);
+}
+
+/* TEXTO */
+.texto{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.85),
+      rgba(224,247,250,.95)
+    );
+  padding:45px;
+  border-radius:32px;
+  line-height:2.05;
+  font-size:1.12em;
+  box-shadow:0 0 35px rgba(0,0,0,.15);
+  border-left:6px solid #ec4899;
+}
+
+/* SECCIONES */
+.seccion{
+  margin-top:110px;
+}
+
+/* BOTONES */
+.boton{
+  background:linear-gradient(135deg,#f9a8d4,#22d3ee);
+  border:none;
+  padding:12px 28px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:1em;
+  font-weight:600;
+  margin:10px 10px 0 0;
+  color:#083344;
+  transition:.3s ease;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.boton:hover{
+  transform:scale(1.08);
+  background:linear-gradient(135deg,#ec4899,#38bdf8);
+}
+
+input[type="text"]{
+  width:100%;
+  padding:12px;
+  border-radius:18px;
+  border:none;
+  margin:10px 0;
+  font-size:1em;
+  background:#ecfeff;
+  color:#083344;
+}
+
+.feedback{
+  margin-top:18px;
+  font-weight:600;
+}
+
+/* XR / VR / AR */
+.xr-section{
+  margin-top:120px;
+}
+
+.aviso-app{
+  background:linear-gradient(
+    135deg,
+    rgba(236,72,153,.25),
+    rgba(34,211,238,.25)
+  );
+  border:1px solid rgba(236,72,153,.35);
+  border-radius:36px;
+  padding:50px;
+  text-align:center;
+  box-shadow:0 0 60px rgba(236,72,153,.25);
+  margin-bottom:80px;
+}
+
+.xr-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:45px;
+}
+
+.xr-box{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.9),
+    rgba(224,247,250,.95)
+  );
+  border:1px solid rgba(14,165,164,.4);
+  border-radius:34px;
+  padding:40px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(0,0,0,.15);
+  transition:.4s ease;
+}
+
+.xr-box:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 70px rgba(236,72,153,.35);
+}
+
+.qr-img{
+  width:200px;
+  height:200px;
+  background:#fff;
+  padding:12px;
+  border-radius:22px;
+  margin:30px auto;
+  display:block;
+}
+
+/* FOOTER */
+footer{
+  margin-top:120px;
+  text-align:center;
+  font-size:0.85em;
+  opacity:0.75;
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:22px;
+}
+
+.cerrar{
+  position:absolute;
+  top:25px;
+  right:35px;
+  font-size:38px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>El Delfín Rosado</h1>
+<h2>Leyenda del Oriente ecuatoriano</h2>
+
+<div class="imagen" onclick="abrirImagen('Imagenes/delfin1.jpg')" style="background-image:url('Imagenes/delfin1.jpg');"></div>
+
+<div class="texto">
+Cuando el sol se esconde, la selva empieza a verse en contraluz y es difícil
+divisar con claridad cualquier cosa, en el agua del río algo empieza a
+moverse. Emerge y se sumerge.
+En el río Amazonas que pasa por la selva colombiana vamos a encontrar a su
+habitante más característico denominado por los indígenas bote o el delfín
+rosado. Este es el delfín de agua dulce más grande del mundo. Alcanza
+longitudes de hasta 2.80 m y pesos de 180 kg. Su color rosado está
+determinado genéticamente, pero su intensidad depende de la actividad física
+del animal.
+</div>
+
+<div class="imagen" onclick="abrirImagen('Imagenes/delfin2.webp')" style="background-image:url('Imagenes/delfin2.webp');"></div>
+
+<div class="texto">
+De acuerdo con la leyenda, el delfín rosado fue un joven guerrero indígena.
+Pero uno de los dioses le envidió sus atributos masculinos y decidió
+transformarlo el delfín y con esto condenarlo a vivir en los ríos y lagos de la
+Amazonia.
+En junio, mes de fiestas, danzas, fuegos y música, cuando los indígenas
+celebran los natalicios de sus santos y los hombres están ocupados
+divirtiéndose, los delfines rosados salen del río para seducir a las mujeres
+jóvenes. Los indígenas cuentan que esto ocurrió ya varias veces. El delfín
+rosado convertido en un hombre atractivo y un amante insaciable se acerca a
+la orilla. Está vestido de blanco y la cabeza la tiene cubierta por un sombrero
+de paja. Bajo el sombrero esconde la única característica que le quedó del
+delfín, el orificio en la cabeza por donde respira. Es por eso que cuando algún
+hombre de sombrero se presenta durante el mes de junio, los habitantes de la
+selva amazónica piden que se quite el sombrero para asegurarse de que no
+sea un delfín
+
+</div>
+
+<div class="imagen" onclick="abrirImagen('Imagenes/delfin3.jpg')" style="background-image:url('Imagenes/delfin3.jpg');"></div>
+
+<div class="texto">
+El atractivo delfín baila perfectamente y ninguna mujer puede huir ante sus
+encantos. Él escoge a la muchacha más bonita, le dice piropos, baila con ella
+y al final le propone un paseo al borde del río. Al día siguiente, la mujer no
+recuerda nada de lo que había pasado en la noche. Al rato se da cuenta de
+que está embarazada.
+Este estado de cosas no provoca ninguna sensación entre los indígenas que
+saben que el único culpable es el delfín rosado y la pobre e inocente mujer se
+dejó llevar por las bellas palabras y el físico atractivo.
+Las mujeres indígenas y los delfines de Amazonia prefieren no acercarse
+mucho. En la cuenca del Amazonas, los nativos son muy supersticiosos y
+llaman a los niños que nacen con espina bífida botos. Creen también que si le
+hacen daño a los delfines rosados, sus hijos nacerían con la enfermedad.
+De acuerdo con la leyenda local, las mujeres jóvenes en los días de su
+menstruación y en las noches de luna llena que entren a las aguas del río
+Amazonas o anden por el río en una canoa, pueden contar con la visita del
+delfín que irá a embarazarlas. Por esta causa se les acredita a los delfines
+rosados la paternidad de todos los niños sin padre de la región. Hasta se han
+encontrado casos de niños registrados en las notarias como hijos del delfín.
+Por esto, los hombres indígenas de la región intentan a veces a acabar con la
+vida de estos animales, pues no quieren que ellos embazaren a sus mujeres.
+</div>
+
+<div class="seccion xr-section">
+<h2>🚀 Experiencias Inmersivas Premium</h2>
+
+<div class="aviso-app">
+<strong>⚠️ Aviso importante</strong>
+<p>Para acceder a las experiencias de <b>Realidad Virtual</b> y <b>Realidad Aumentada</b>
+es necesario descargar la aplicación <strong>DELIGHTEX</strong>.</p>
+</div>
+
+<div class="xr-grid">
+  <div class="xr-box">
+    <h3>🕶️ Realidad Virtual</h3>
+    <p>Explora el río amazónico junto al Delfín Rosado.</p>
+    <img src="Imagenes/rv3.jpeg" class="qr-img">
+  </div>
+
+  <div class="xr-box">
+    <h3>📱 Realidad Aumentada</h3>
+    <p>Observa al Delfín Rosado aparecer en tu entorno.</p>
+    <img src="Imagenes/rad.jpeg" class="qr-img">
+  </div>
+</div>
+</div>
+
+<footer>
+Ecuador Legendario © 2026 — Guardianes del Amazonas
+</footer>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="cerrarImagen()">
+<span class="cerrar">&times;</span>
+<img id="imgLightbox">
+</div>
+
+<script>
+function abrirImagen(src){
+  document.getElementById("imgLightbox").src = src;
+  document.getElementById("lightbox").style.display = "flex";
+}
+function cerrarImagen(){
+  document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
