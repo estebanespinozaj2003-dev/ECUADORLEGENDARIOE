@@ -116,7 +116,7 @@ body{
   text-align: center;
   background:
     linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65)),
-    url("/Imagenes/imagen1.png") center / cover no-repeat;
+    url("Imagenes/imagen1.png") center / cover no-repeat;
 }
 
 
