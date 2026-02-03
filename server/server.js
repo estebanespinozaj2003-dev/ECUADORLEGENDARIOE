@@ -4,9 +4,7 @@
    ENV
 ========================= */
 const path = require("path");
-require("dotenv").config({
-  path: path.join(__dirname, ".env")
-});
+require("dotenv").config(); // En Render no usa .env, pero en local sí
 
 /* =========================
    Imports
@@ -31,7 +29,7 @@ const PORT = process.env.PORT || 5000;
 ========================= */
 const PAYPAL_ENV = (process.env.PAYPAL_ENV || "sandbox").toLowerCase();
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID || "";
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET || "";
+const PAYPAL_SECRET = process.env.PAYPAL_CLIENT_SECRET || "";
 
 const PREMIUM_PRICE = Number(process.env.PREMIUM_PRICE || "4.99");
 const PREMIUM_CURRENCY = (process.env.PREMIUM_CURRENCY || "USD").toUpperCase();
@@ -55,7 +53,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "dev_secret",
+    secret: process.env.SESSION_SECRET || "dev_secret_change_me",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -66,7 +64,7 @@ app.use(
 );
 
 /* =========================
-   Static files (FRONTEND)
+   Static files
 ========================= */
 app.use(express.static(publicPath));
 
@@ -287,5 +285,5 @@ app.post("/api/paypal/capture-order", requireLogin, async (req, res) => {
    Start
 ========================= */
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor listo en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });
