@@ -239,17 +239,13 @@ async function openPremiumFlow(link) {
 // =========================
 // PayPal REAL
 // =========================
-async function loadPayPalSDK({ paypalEnv, paypalClientId, premiumCurrency }) {
+async function loadPayPalSDK({ paypalClientId, premiumCurrency }) {
   if (window.paypal) return;
-
-  const base =
-    paypalEnv === "live"
-      ? "https://www.paypal.com/sdk/js"
-      : "https://www.sandbox.paypal.com/sdk/js";
 
   const script = document.createElement("script");
   script.src =
-    `${base}?client-id=${encodeURIComponent(paypalClientId)}` +
+    `https://www.paypal.com/sdk/js` +
+    `?client-id=${encodeURIComponent(paypalClientId)}` +
     `&currency=${encodeURIComponent(premiumCurrency || "USD")}` +
     `&intent=capture`;
 
