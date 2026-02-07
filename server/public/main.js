@@ -6,11 +6,22 @@ const $$ = (s) => Array.from(document.querySelectorAll(s));
 
 function openModal(modal) {
   if (!modal) return;
+
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
+
+  // 🔹 Poner foco dentro del modal
+  const focusable = modal.querySelector("input, button");
+  if (focusable) focusable.focus();
 }
+
 function closeModal(modal) {
   if (!modal) return;
+
+  // 🔹 Quitar foco de elementos internos
+  const focused = modal.querySelector(":focus");
+  if (focused) focused.blur();
+
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
 }
