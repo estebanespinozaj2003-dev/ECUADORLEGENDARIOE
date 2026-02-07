@@ -15,8 +15,7 @@ const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcryptjs");
 
 // node-fetch (Node)
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const r = await fetch(url, options);
 
 /* =========================
    App

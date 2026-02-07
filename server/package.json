@@ -12,5 +12,8 @@
     "express": "^4.19.2",
     "express-session": "^1.17.3",
     "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
