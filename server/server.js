@@ -1,10 +1,3 @@
-/* =========================
-   Node fetch (compat seguro)
-========================= */
-if (typeof fetch === "undefined") {
-  global.fetch = (...args) =>
-    import("node-fetch").then(({ default: fetch }) => fetch(...args));
-}
 
 "use strict";
 
