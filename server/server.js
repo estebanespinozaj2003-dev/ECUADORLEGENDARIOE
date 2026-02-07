@@ -6,51 +6,76 @@ const express = require("express");
 const session = require("express-session");
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcryptjs");
+const paypal = require("@paypal/checkout-server-sdk");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 /* =========================
-   Middleware
+   PAYPAL
+========================= */
+const PAYPAL_CLIENT_ID = "AeX5UOoG51RdnTEvBgt3vrhkCwlr9Fm-n7x6vxijICMlIOvUfGdeBfFLBAnO-Y1FMqz8JU-5rAOME6Yn";
+const PAYPAL_SECRET = "EFQs7_w_WOgKwTEPMp2jC3yQQe3He8XyBOwpvxSC3Y6a1d5AmGg61PO0ls2YNxLZZeBT9ZCLTKYVJR4m";
+const PAYPAL_ENV = "sandbox"; // sandbox o live
+
+function paypalClient() {
+  const environment =
+    PAYPAL_ENV === "live"
+      ? new paypal.core.LiveEnvironment(
+          PAYPAL_CLIENT_ID,
+          PAYPAL_SECRET
+        )
+      : new paypal.core.SandboxEnvironment(
+          PAYPAL_CLIENT_ID,
+          PAYPAL_SECRET
+        );
+
+  return new paypal.core.PayPalHttpClient(environment);
+}
+
+/* =========================
+   MIDDLEWARE
 ========================= */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "dev_secret",
+    name: "ecuador-legendario-session",
+    secret: "ESCRIBE_AQUI",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      httpOnly: true
+    }
   })
 );
 
 /* =========================
-   Static
+   STATIC
 ========================= */
-const publicPath = path.join(__dirname, "public");
-app.use(express.static(publicPath));
+app.use(express.static(path.join(__dirname, "public")));
 
 /* =========================
-   DB
+   DATABASE
 ========================= */
-const DB_PATH = path.join(__dirname, "legendario.sqlite");
-const db = new sqlite3.Database(DB_PATH, () => {
-  console.log("SQLite conectado");
-});
+const db = new sqlite3.Database(
+  path.join(__dirname, "legendario.sqlite"),
+  () => console.log("SQLite conectado")
+);
 
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      is_premium INTEGER DEFAULT 0
-    )
-  `);
-});
+db.run(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    is_premium INTEGER DEFAULT 0
+  )
+`);
 
 /* =========================
-   Helpers
+   HELPERS
 ========================= */
 function requireLogin(req, res, next) {
   if (!req.session.user) {
@@ -127,15 +152,62 @@ app.get("/api/auth/me", (req, res) => {
 });
 
 /* =========================
-   Test
+   PAYPAL CREATE ORDER
 ========================= */
-app.get("/api/test", (req, res) => {
-  res.json({ ok: true });
+app.post("/api/paypal/create-order", requireLogin, async (req, res) => {
+  const request = new paypal.orders.OrdersCreateRequest();
+  request.prefer("return=representation");
+
+  request.requestBody({
+    intent: "CAPTURE",
+    purchase_units: [
+      {
+        amount: {
+          currency_code: "USD",
+          value: "4.99"
+        }
+      }
+    ]
+  });
+
+  try {
+    const order = await paypalClient().execute(request);
+    res.json({ id: order.result.id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "PAYPAL_CREATE_ERROR" });
+  }
 });
 
 /* =========================
-   Start
+   PAYPAL CAPTURE ORDER
+========================= */
+app.post("/api/paypal/capture-order", requireLogin, async (req, res) => {
+  const { orderID } = req.body;
+
+  const request = new paypal.orders.OrdersCaptureRequest(orderID);
+  request.requestBody({});
+
+  try {
+    await paypalClient().execute(request);
+
+    db.run(
+      "UPDATE users SET is_premium = 1 WHERE id = ?",
+      [req.session.user.id],
+      () => {
+        req.session.user.isPremium = true;
+        res.json({ ok: true });
+      }
+    );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "PAYPAL_CAPTURE_ERROR" });
+  }
+});
+
+/* =========================
+   START
 ========================= */
 app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto", PORT);
+  console.log("Servidor activo en puerto", PORT);
 });
