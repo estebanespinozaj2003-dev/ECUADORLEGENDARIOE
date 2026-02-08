@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     name: "ecuador-legendario-session",
-    secret: "ESCRIBE_AQUI",
+    secret: "ecuador_legendario_session_2026_segura",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -149,6 +149,16 @@ app.post("/api/auth/logout", (req, res) => {
 
 app.get("/api/auth/me", (req, res) => {
   res.json({ user: req.session.user || null });
+});
+
+/* =========================
+   CONFIG (FRONTEND)
+========================= */
+app.get("/api/config", (req, res) => {
+  res.json({
+    paypalClientId: PAYPAL_CLIENT_ID,
+    premiumCurrency: "USD"
+  });
 });
 
 /* =========================
